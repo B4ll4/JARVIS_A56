@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JARVIS A56</string>
+    <string name="app_description">Assistente pessoal com integração máxima ao Samsung Galaxy A56</string>
+    <string name="hello">Olá, Senhor</string>
+    <string name="listening">Ouvindo...</string>
+    <string name="ready">Pronto</string>
+    <string name="wifi">WiFi</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="gps">GPS</string>
+    <string name="settings">Configurações</string>
+    <string name="battery">Bateria</string>
+    <string name="status">Status</string>
+</resources>

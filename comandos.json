@@ -1,0 +1,250 @@
+{
+  "version": "1.0.0",
+  "commands": [
+    {
+      "id": "wifi_on",
+      "name": "Ligar WiFi",
+      "voice": "Ligar wifi",
+      "action": "toggleWiFi",
+      "params": { "enable": true }
+    },
+    {
+      "id": "wifi_off",
+      "name": "Desligar WiFi",
+      "voice": "Desligar wifi",
+      "action": "toggleWiFi",
+      "params": { "enable": false }
+    },
+    {
+      "id": "bluetooth_on",
+      "name": "Ligar Bluetooth",
+      "voice": "Ligar bluetooth",
+      "action": "toggleBluetooth",
+      "params": { "enable": true }
+    },
+    {
+      "id": "bluetooth_off",
+      "name": "Desligar Bluetooth",
+      "voice": "Desligar bluetooth",
+      "action": "toggleBluetooth",
+      "params": { "enable": false }
+    },
+    {
+      "id": "gps_on",
+      "name": "Ligar GPS",
+      "voice": "Ligar gps",
+      "action": "toggleGPS",
+      "params": { "enable": true }
+    },
+    {
+      "id": "gps_off",
+      "name": "Desligar GPS",
+      "voice": "Desligar gps",
+      "action": "toggleGPS",
+      "params": { "enable": false }
+    },
+    {
+      "id": "airplane_mode_on",
+      "name": "Ativar Modo Avião",
+      "voice": "Modo avião",
+      "action": "setAirplaneMode",
+      "params": { "enable": true }
+    },
+    {
+      "id": "airplane_mode_off",
+      "name": "Desativar Modo Avião",
+      "voice": "Desativar modo avião",
+      "action": "setAirplaneMode",
+      "params": { "enable": false }
+    },
+    {
+      "id": "brightness_max",
+      "name": "Brilho Máximo",
+      "voice": "Brilho máximo",
+      "action": "setBrightness",
+      "params": { "level": 255 }
+    },
+    {
+      "id": "brightness_min",
+      "name": "Brilho Mínimo",
+      "voice": "Brilho mínimo",
+      "action": "setBrightness",
+      "params": { "level": 50 }
+    },
+    {
+      "id": "dark_mode_on",
+      "name": "Modo Escuro",
+      "voice": "Modo escuro",
+      "action": "toggleDarkMode",
+      "params": { "enable": true }
+    },
+    {
+      "id": "lock_screen",
+      "name": "Bloquear Tela",
+      "voice": "Bloquear tela",
+      "action": "lockScreen",
+      "params": {}
+    },
+    {
+      "id": "camera_open",
+      "name": "Abrir Câmera",
+      "voice": "Abrir câmera",
+      "action": "openCamera",
+      "params": { "type": "rear" }
+    },
+    {
+      "id": "camera_selfie",
+      "name": "Câmera Frontal",
+      "voice": "Câmera frontal",
+      "action": "openCamera",
+      "params": { "type": "front" }
+    },
+    {
+      "id": "take_photo",
+      "name": "Tirar Foto",
+      "voice": "Tirar foto",
+      "action": "takePhoto",
+      "params": { "resolution": "50mp" }
+    },
+    {
+      "id": "record_video",
+      "name": "Gravar Vídeo",
+      "voice": "Gravar vídeo",
+      "action": "recordVideo",
+      "params": { "quality": "4k", "fps": 60 }
+    },
+    {
+      "id": "flashlight_on",
+      "name": "Ligar Lanterna",
+      "voice": "Ligar lanterna",
+      "action": "toggleFlashlight",
+      "params": { "enable": true }
+    },
+    {
+      "id": "flashlight_off",
+      "name": "Desligar Lanterna",
+      "voice": "Desligar lanterna",
+      "action": "toggleFlashlight",
+      "params": { "enable": false }
+    },
+    {
+      "id": "vibrate",
+      "name": "Vibrar",
+      "voice": "Vibrar",
+      "action": "vibrate",
+      "params": { "duration": 200 }
+    },
+    {
+      "id": "battery_status",
+      "name": "Status da Bateria",
+      "voice": "Qual é a bateria",
+      "action": "getBatteryStatus",
+      "params": {}
+    },
+    {
+      "id": "system_info",
+      "name": "Informações do Sistema",
+      "voice": "Informações do sistema",
+      "action": "getSystemInfo",
+      "params": {}
+    },
+    {
+      "id": "list_apps",
+      "name": "Listar Apps",
+      "voice": "Listar aplicativos",
+      "action": "listInstalledApps",
+      "params": {}
+    },
+    {
+      "id": "open_app",
+      "name": "Abrir App",
+      "voice": "Abrir {app_name}",
+      "action": "openApp",
+      "params": { "package": "com.example.app" }
+    },
+    {
+      "id": "close_app",
+      "name": "Fechar App",
+      "voice": "Fechar {app_name}",
+      "action": "forceStopApp",
+      "params": { "package": "com.example.app" }
+    },
+    {
+      "id": "clear_cache",
+      "name": "Limpar Cache",
+      "voice": "Limpar cache",
+      "action": "clearAppCache",
+      "params": { "package": "com.example.app" }
+    },
+    {
+      "id": "set_alarm",
+      "name": "Definir Alarme",
+      "voice": "Me acorda às {time}",
+      "action": "setAlarm",
+      "params": { "time": "06:00", "label": "Acordar" }
+    },
+    {
+      "id": "create_event",
+      "name": "Criar Evento",
+      "voice": "Criar evento",
+      "action": "createCalendarEvent",
+      "params": { "title": "Evento", "time": "14:00" }
+    },
+    {
+      "id": "send_sms",
+      "name": "Enviar SMS",
+      "voice": "Enviar mensagem para {contact}",
+      "action": "sendSMS",
+      "params": { "number": "+5585999999999", "message": "Olá" }
+    },
+    {
+      "id": "make_call",
+      "name": "Fazer Ligação",
+      "voice": "Ligar para {contact}",
+      "action": "makeCall",
+      "params": { "number": "+5585999999999" }
+    },
+    {
+      "id": "protocol_extremis",
+      "name": "Protocolo Extremis",
+      "voice": "Protocolo extremis",
+      "action": "activateExtremisProtocol",
+      "params": { "requiresRoot": true }
+    },
+    {
+      "id": "ghost_mode",
+      "name": "Modo Fantasma",
+      "voice": "Protocolo fantasma",
+      "action": "activateGhostMode",
+      "params": { "duration": 3600 }
+    },
+    {
+      "id": "security_photo",
+      "name": "Foto de Segurança",
+      "voice": "Foto de segurança",
+      "action": "takeSecurityPhoto",
+      "params": { "failedAttempts": 3 }
+    },
+    {
+      "id": "locate_device",
+      "name": "Localizar Dispositivo",
+      "voice": "Cadê você",
+      "action": "locateDevice",
+      "params": { "alarm": true, "flash": true }
+    },
+    {
+      "id": "reboot",
+      "name": "Reiniciar",
+      "voice": "Reiniciar",
+      "action": "rebootDevice",
+      "params": { "requiresRoot": true }
+    },
+    {
+      "id": "shutdown",
+      "name": "Desligar",
+      "voice": "Desligar",
+      "action": "shutdownDevice",
+      "params": { "requiresRoot": true }
+    }
+  ]
+}
