@@ -11,7 +11,9 @@ jobs:
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
       - name: Build with Gradle
-        run: gradle assembleDebug
+        run: |
+          rm -f gradle.properties
+          gradle assembleDebug --no-daemon -Dorg.gradle.jvmargs="-Xmx2048m"
       - uses: actions/upload-artifact@v4
         with:
           name: JARVIS-A56-APK
