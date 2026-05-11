@@ -10,10 +10,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
-      - name: Build with Gradle
+      
+      - name: Create gradle.properties
         run: |
-          rm -f gradle.properties
-          gradle assembleDebug --no-daemon -Dorg.gradle.jvmargs="-Xmx2048m"
+          echo "android.useAndroidX=true" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+          echo "android.suppressUnsupportedCompileSdk=36" >> gradle.properties
+          
+      - name: Build with Gradle
+        run: gradle assembleDebug --no-daemon
+        
       - uses: actions/upload-artifact@v4
         with:
           name: JARVIS-A56-APK
