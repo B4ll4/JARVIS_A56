@@ -1,39 +1,39 @@
-name: Build APK - JARVIS FINAL
+name: Build APK - SHIZUKU FIX
 on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
-          
       - uses: android-actions/setup-android@v3
       
-      - name: Deletar gradle.properties cagado
-        run: rm -f gradle.properties
-        
-      - name: Criar gradle.properties limpo
+      - name: Limpar gradle.properties
         run: |
+          rm -f gradle.properties
           echo "org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8" >> gradle.properties
           echo "android.useAndroidX=true" >> gradle.properties
           echo "android.enableJetifier=true" >> gradle.properties
           echo "org.gradle.daemon=false" >> gradle.properties
           
-      - name: Corrigir build.gradle.kts
+      - name: Remover repo morto da Rikka e corrigir SDK
         run: |
+          sed -i '/maven.rikka.app/d' settings.gradle.kts
+          sed -i '/maven.rikka.app/d' build.gradle.kts
           sed -i 's/compileSdk = 36/compileSdk = 34/g' build.gradle.kts
           sed -i 's/targetSdk = 36/targetSdk = 34/g' build.gradle.kts
           sed -i 's/id("com.android.application") version "8.2.0"/id("com.android.application") version "8.1.4"/g' build.gradle.kts
           
-      - name: Corrigir app/build.gradle.kts se existir
+      - name: Corrigir app/build.gradle.kts e trocar Shizuku pro Maven Central
         run: |
           if [ -f app/build.gradle.kts ]; then
             sed -i 's/compileSdk = 36/compileSdk = 34/g' app/build.gradle.kts
             sed -i 's/targetSdk = 36/targetSdk = 34/g' app/build.gradle.kts
+            sed -i 's/implementation("dev.rikka.shizuku:api:.*")/implementation("dev.rikka.shizuku:api:13.1.5")/g' app/build.gradle.kts
+            sed -i 's/implementation("dev.rikka.shizuku:provider:.*")/implementation("dev.rikka.shizuku:provider:13.1.5")/g' app/build.gradle.kts
           fi
           
       - name: Build
@@ -41,5 +41,5 @@ jobs:
         
       - uses: actions/upload-artifact@v4
         with:
-          name: JARVIS-A56-APK-FINAL
+          name: JARVIS-A56-APK-FUNCIONANDO
           path: app/build/outputs/apk/debug/*.apk
