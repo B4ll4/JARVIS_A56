@@ -1,4 +1,4 @@
-name: Build APK - SHIZUKU FIX
+name: Build APK - GRADLE 8.9 FIX
 on: [workflow_dispatch]
 jobs:
   build:
@@ -11,6 +11,11 @@ jobs:
           distribution: 'temurin'
       - uses: android-actions/setup-android@v3
       
+      - name: Forçar Gradle 8.9
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.9
+          
       - name: Limpar gradle.properties
         run: |
           rm -f gradle.properties
@@ -41,5 +46,5 @@ jobs:
         
       - uses: actions/upload-artifact@v4
         with:
-          name: JARVIS-A56-APK-FUNCIONANDO
+          name: JARVIS-A56-APK-AGORA-VAI
           path: app/build/outputs/apk/debug/*.apk
