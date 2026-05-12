@@ -1,50 +1,55 @@
-name: Build APK - GRADLE 8.9 FIX
+name: JARVIS FINAL - AGORA VAI
 on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
+          
       - uses: android-actions/setup-android@v3
       
-      - name: Forçar Gradle 8.9
+      - name: Forçar Gradle 8.9 ESTÁVEL
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: 8.9
           
-      - name: Limpar gradle.properties
+      - name: DESTRUIR TODAS AS BOMBAS DO MANUS
         run: |
+          # 1. Mata gradle.properties com MaxPermSize
           rm -f gradle.properties
-          echo "org.gradle.jvmargs=-Xmx2048m -Dfile.encoding=UTF-8" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx4096m -Dfile.encoding=UTF-8" >> gradle.properties
           echo "android.useAndroidX=true" >> gradle.properties
           echo "android.enableJetifier=true" >> gradle.properties
           echo "org.gradle.daemon=false" >> gradle.properties
+          echo "android.suppressUnsupportedCompileSdk=34" >> gradle.properties
           
-      - name: Remover repo morto da Rikka e corrigir SDK
-        run: |
-          sed -i '/maven.rikka.app/d' settings.gradle.kts
-          sed -i '/maven.rikka.app/d' build.gradle.kts
-          sed -i 's/compileSdk = 36/compileSdk = 34/g' build.gradle.kts
-          sed -i 's/targetSdk = 36/targetSdk = 34/g' build.gradle.kts
-          sed -i 's/id("com.android.application") version "8.2.0"/id("com.android.application") version "8.1.4"/g' build.gradle.kts
+          # 2. Mata repo morto da Rikka em TODOS arquivos
+          find . -name "*.gradle*" -type f -exec sed -i '/maven.rikka.app/d' {} +
           
-      - name: Corrigir app/build.gradle.kts e trocar Shizuku pro Maven Central
-        run: |
-          if [ -f app/build.gradle.kts ]; then
-            sed -i 's/compileSdk = 36/compileSdk = 34/g' app/build.gradle.kts
-            sed -i 's/targetSdk = 36/targetSdk = 34/g' app/build.gradle.kts
-            sed -i 's/implementation("dev.rikka.shizuku:api:.*")/implementation("dev.rikka.shizuku:api:13.1.5")/g' app/build.gradle.kts
-            sed -i 's/implementation("dev.rikka.shizuku:provider:.*")/implementation("dev.rikka.shizuku:provider:13.1.5")/g' app/build.gradle.kts
-          fi
+          # 3. Força SDK 34 e AGP 8.1.4 em TUDO
+          find . -name "*.gradle*" -type f -exec sed -i 's/compileSdk = 36/compileSdk = 34/g' {} +
+          find . -name "*.gradle*" -type f -exec sed -i 's/targetSdk = 36/targetSdk = 34/g' {} +
+          find . -name "*.gradle*" -type f -exec sed -i 's/compileSdkVersion 36/compileSdkVersion 34/g' {} +
+          find . -name "*.gradle*" -type f -exec sed -i 's/targetSdkVersion 36/targetSdkVersion 34/g' {} +
+          find . -name "*.gradle*" -type f -exec sed -i 's/id("com.android.application") version "8.2.0"/id("com.android.application") version "8.1.4"/g' {} +
           
-      - name: Build
-        run: gradle assembleDebug --no-daemon --stacktrace
+          # 4. MATA A LIB speechrecognition ALPHA QUE NÃO EXISTE
+          find . -name "*.gradle*" -type f -exec sed -i '/androidx.speechrecognition/d' {} +
+          find . -name "*.gradle*" -type f -exec sed -i '/speechrecognition/d' {} +
+          
+          # 5. Força Shizuku 13.1.5 do Maven Central
+          find . -name "*.gradle*" -type f -exec sed -i 's/implementation("dev.rikka.shizuku:api:.*")/implementation("dev.rikka.shizuku:api:13.1.5")/g' {} +
+          find . -name "*.gradle*" -type f -exec sed -i 's/implementation("dev.rikka.shizuku:provider:.*")/implementation("dev.rikka.shizuku:provider:13.1.5")/g' {} +
+          
+      - name: Build com log completo
+        run: gradle clean assembleDebug --no-daemon --stacktrace --info
         
       - uses: actions/upload-artifact@v4
         with:
-          name: JARVIS-A56-APK-AGORA-VAI
+          name: JARVIS-A56-FINAL-FUNCIONANDO
           path: app/build/outputs/apk/debug/*.apk
